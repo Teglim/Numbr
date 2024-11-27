@@ -80,7 +80,9 @@
 }
 
 .checkbox {
-    display: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     flex-shrink: 0;
     height: 24px;
     width: 24px;
@@ -99,12 +101,7 @@
     place-content: center;
     color: white;
     height: 100%;
-    font-family: "Material Icons";
+    width: 100%;
     font-size: 18px;
     content: "×";
-}
-
-.checkbox:focus-visible {
-    outline: 2px solid #1d9bf0;
-    outline-offset: 2px;
 }
