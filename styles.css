@@ -80,7 +80,7 @@
 }
 
 .checkbox {
-    appearance: none;
+    display: none;
     flex-shrink: 0;
     height: 24px;
     width: 24px;
