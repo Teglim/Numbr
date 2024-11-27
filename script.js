@@ -8,6 +8,49 @@ const compositeNumbers = [
 ];
 
 let score = 0;
+let timeLeft = 600;
+let questionCount = 0;
+let timerInterval;
+let answeredQuestions = [];
+let selectedNumbers = [];
+
+function startGame() {
+    document.getElementById("startScreen").style.display = "none";
+    document.getElementById("gameScreen").style.display = "block";
+    startTimer();
+    generateNumbers();
+}
+
+function startTimer() {
+    timerInterval = setInterval(() => {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        document.getElementById('timer').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            endGame();
+        } else {
+            timeLeft--;
+        }
+    }, 1000);
+}
+
+function endGame() {
+    document.getElementById("gameScreen").style.display = "none";
+    document.getElementById("resultScreen").style.display = "block";
+
+    const totalTime = 600 - timeLeft;
+    const minutes = Math.floor(totalTime / 60);
+    const seconds = totalTime % 60;
+
+    document.getElementById('finalScore').textContent = `Score: ${score}`;
+    document.getElementById('finalTime').textContent = `Time: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+    const questionResults = answeredQuestions.map((result, index) => {
+        return `Q${index + 1}:${result.correct ? '○' : '×'}`;
+    }).join('  ');
+    document.getElementById('questionResults').innerHTML = questionResults;
+}
 
 function primeFactors(n) {
     const factors = [];
@@ -46,11 +89,7 @@ function highlightHighestScore(buttons, scores) {
     });
 }
 
-function handleSelection(buttons, selectedNumbers, scores, number, smallestFactor) {
-    score += smallestFactor;
-
-    document.getElementById('score').textContent = `Score: ${score}`;
-
+function handleSelection(buttons, scores, number, smallestFactor) {
     buttons.forEach((button, index) => {
         updateFactors(button, selectedNumbers[index], `factor-display-${index + 1}`);
     });
@@ -59,14 +98,28 @@ function handleSelection(buttons, selectedNumbers, scores, number, smallestFacto
 
     const details = document.getElementById('details');
     const factors = primeFactors(number);
-    details.innerHTML = `Selected number: ${number}<br>Prime factors: ${factors.join(' × ')}`;
+    details.innerHTML = `選択した数: ${number}<br>式: ${factors.join(' × ')}`;
 
-    generateNumbers();
+    const questionResults = (smallestFactor == Math.max(...scores));
+
+    answeredQuestions.push({ correct: questionResults, number });
+
+    score += questionResults;
+
+    document.getElementById('score').textContent = `得点: ${score}`;
+
+    questionCount++;
+
+    if (questionCount >= 20) {
+        endGame();
+    } else {
+        generateNumbers();
+    }
 }
 
 function generateNumbers() {
     const buttons = document.querySelectorAll('#buttons button');
-    const selectedNumbers = [];
+    selectedNumbers = [];
     while (selectedNumbers.length < 4) {
         const num = compositeNumbers[Math.floor(Math.random() * compositeNumbers.length)];
         if (!selectedNumbers.includes(num)) selectedNumbers.push(num);
@@ -76,7 +129,7 @@ function generateNumbers() {
 
     buttons.forEach((button, index) => {
         button.textContent = selectedNumbers[index];
-        button.onclick = () => handleSelection(buttons, selectedNumbers, scores, selectedNumbers[index], scores[index]);
+        button.onclick = () => handleSelection(buttons, scores, selectedNumbers[index], scores[index]);
     });
 }
 

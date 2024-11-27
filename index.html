@@ -9,9 +9,16 @@
 </head>
 
 <body>
-    <div id="game-container">
-        <h1>NumBr</h1>
-        <div id="score">Score: 0</div>
+    <div id="startScreen">
+        <h1>NumBr(仮)へようこそ</h1>
+        問題数は20問。制限時間は10分。<br>
+        最小の素因数が、提示される4つの数字のうち最大のものを選びましょう。<br>
+        <button type="button" id="startButton" onclick="startGame()">スタート</button>
+    </div>
+
+    <div id="gameScreen">
+        <div id="timer">10:00</div>
+        <div id="score">得点: 0</div>
         <div id="buttons" class="grid-container">
             <div class="button-container">
                 <button id="btn1"></button>
@@ -32,6 +39,15 @@
         </div>
         <div id="details"></div>
     </div>
+
+    <div id="resultScreen" style="display:none;">
+        <h1>結果</h1>
+        <div id="finalScore">得点: 0</div>
+        <div id="finalTime">所要時間: 00:00</div>
+        <div id="questionResults"></div>
+        <button type="button" id="resultButton" onclick="location.href='./index.html'">リスタート</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 

@@ -1,4 +1,10 @@
-#game-container {
+#startScreen {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#gameScreen {
+    display: none;
     text-align: center;
     margin-top: 50px;
 }
@@ -54,4 +60,21 @@
     text-align: left;
     font-size: 14px;
     white-space: nowrap;
+}
+
+#startButton {
+    flex-shrink: 0;
+    width: 100px;
+    height: 50px;
+    margin-top: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#resultButton {
+    flex-shrink: 0;
+    width: 100px;
+    height: 50px;
+    font-size: 16px;
+    cursor: pointer;    
 }
