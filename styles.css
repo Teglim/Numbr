@@ -1,0 +1,54 @@
+#game-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+#details {
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.smallest-factor {
+    color: red;
+}
+
+.highest-score {
+    background-color: yellow;
+}
+
+#buttons {
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    justify-content: center;
+}
+
+.button-container {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#buttons button {
+    width: 100px;
+    height: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+}
+
+.factor-display {
+    margin-top: 5px;
+    text-align: center;
+}
