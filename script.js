@@ -90,6 +90,12 @@ function highlightHighestScore(buttons, scores) {
 }
 
 function handleSelection(buttons, scores, number, smallestFactor) {
+    const checkboxes = document.querySelectorAll("input[type='checkbox']");
+            
+    checkboxes.forEach(function(checkbox) {
+        checkbox.checked = false;
+    });
+
     buttons.forEach((button, index) => {
         updateFactors(button, selectedNumbers[index], `factor-display-${index + 1}`);
     });
