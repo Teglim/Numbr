@@ -62,19 +62,11 @@
     white-space: nowrap;
 }
 
-#startButton {
+button[type = "button"] {
     flex-shrink: 0;
     width: 100px;
     height: 50px;
     margin-top: 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-#resultButton {
-    flex-shrink: 0;
-    width: 100px;
-    height: 50px;
     font-size: 16px;
     cursor: pointer;
 }

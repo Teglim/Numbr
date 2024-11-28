@@ -8,7 +8,8 @@ const compositeNumbers = [
 ];
 
 let score = 0;
-let timeLeft = 600;
+let time;
+let timeLeft;
 let questionCount = 0;
 let timerInterval;
 let answeredQuestions = [];
@@ -19,7 +20,12 @@ function startGame() {
     document.getElementById("startScreen").style.display = "none";
     document.getElementById("gameScreen").style.display = "block";
     NumberQuestions = parseInt(document.getElementById('problems').value);
-    timeLeft = parseInt(document.getElementById('timeLimit').value) * 60;
+    time = parseInt(document.getElementById('timeLimit').value) * 60;
+    timeLeft = time;
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    document.getElementById('timer').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    document.getElementById('question').textContent = `問1 / ${NumberQuestions}`;
     startTimer();
     generateNumbers();
 }
@@ -42,12 +48,14 @@ function endGame() {
     document.getElementById("gameScreen").style.display = "none";
     document.getElementById("resultScreen").style.display = "block";
 
-    const totalTime = 600 - timeLeft;
+    const totalTime = time - timeLeft;
     const minutes = Math.floor(totalTime / 60);
     const seconds = totalTime % 60;
+    const d_minutes = Math.floor(time / 60);
+    const d_seconds = time % 60;
 
-    document.getElementById('finalScore').textContent = `Score: ${score}`;
-    document.getElementById('finalTime').textContent = `Time: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+    document.getElementById('finalScore').textContent = `Score: ${score} / ${NumberQuestions}`;
+    document.getElementById('finalTime').textContent = `Time: ${minutes}:${seconds.toString().padStart(2, '0')} / ${d_minutes}:${d_seconds.toString().padStart(2, '0')}`;
 
     const questionResults = answeredQuestions.map((result, index) => {
         return `Q${index + 1}:${result.correct ? '○' : '×'}`;
@@ -116,6 +124,8 @@ function handleSelection(buttons, scores, number, smallestFactor) {
     score += questionResults;
 
     document.getElementById('score').textContent = `得点: ${score}`;
+
+    document.getElementById('question').textContent = `問${questionCount + 1} / ${NumberQuestions}`;
 
     questionCount++;
 
