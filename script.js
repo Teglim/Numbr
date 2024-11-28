@@ -54,11 +54,11 @@ function endGame() {
     const d_minutes = Math.floor(time / 60);
     const d_seconds = time % 60;
 
-    document.getElementById('finalScore').textContent = `Score: ${score} / ${NumberQuestions}`;
-    document.getElementById('finalTime').textContent = `Time: ${minutes}:${seconds.toString().padStart(2, '0')} / ${d_minutes}:${d_seconds.toString().padStart(2, '0')}`;
+    document.getElementById('finalScore').textContent = `得点: ${score} / ${NumberQuestions}`;
+    document.getElementById('finalTime').textContent = `時間: ${minutes}:${seconds.toString().padStart(2, '0')} / ${d_minutes}:${d_seconds.toString().padStart(2, '0')}`;
 
     const questionResults = answeredQuestions.map((result, index) => {
-        return `Q${index + 1}:${result.correct ? '○' : '×'}`;
+        return `問${index + 1}:${result.correct ? '○' : '×'}`;
     }).join('  ');
     document.getElementById('questionResults').innerHTML = questionResults;
 }
