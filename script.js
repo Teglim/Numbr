@@ -144,7 +144,7 @@ function handleSelection(buttons, scores, number, smallestFactor) {
     document.getElementById('question').textContent = `問${currentQuestionNumber} / ${NumberQuestions}`;
 
     setTimeout(() => {
-        if (questionCount === currentQuestionNumber) {
+        if (questionCount + 1 === currentQuestionNumber) {
             clearDisplays();
         }
     }, 5000);
