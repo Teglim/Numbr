@@ -71,6 +71,11 @@ button[type = "button"] {
     cursor: pointer;
 }
 
+#skipButton {
+    margin-top: 80px;
+    background: #ed1919;
+}
+
 .checkbox {
     appearance: none;
     flex-shrink: 0;
