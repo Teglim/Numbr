@@ -100,6 +100,20 @@ function highlightHighestScore(buttons, scores) {
     });
 }
 
+function clearDisplays() {
+
+    const details = document.getElementById('details');
+    details.innerHTML = "<br><br>";
+
+    const factorDisplays = document.querySelectorAll('.factor-display');
+    factorDisplays.forEach(factorDisplay => {
+        factorDisplay.innerHTML = "";
+    });
+
+    const highlighted = document.querySelectorAll('.highest-score');
+    highlighted.forEach(element => element.classList.remove('highest-score'));
+}
+
 function handleSelection(buttons, scores, number, smallestFactor) {
     const checkboxes = document.querySelectorAll("input[type='checkbox']");
 
@@ -122,12 +136,18 @@ function handleSelection(buttons, scores, number, smallestFactor) {
     answeredQuestions.push({ correct: questionResults, number });
 
     score += questionResults;
-
     document.getElementById('score').textContent = `得点: ${score}`;
 
     questionCount++;
 
-    document.getElementById('question').textContent = `問${questionCount + 1} / ${NumberQuestions}`;
+    const currentQuestionNumber = questionCount + 1;
+    document.getElementById('question').textContent = `問${currentQuestionNumber} / ${NumberQuestions}`;
+
+    setTimeout(() => {
+        if (questionCount === currentQuestionNumber) {
+            clearDisplays();
+        }
+    }, 5000);
 
     if (questionCount >= NumberQuestions) {
         endGame();
@@ -138,6 +158,7 @@ function handleSelection(buttons, scores, number, smallestFactor) {
 
 function generateNumbers() {
     const buttons = document.querySelectorAll('#buttons button');
+
     selectedNumbers = [];
     while (selectedNumbers.length < 4) {
         const num = compositeNumbers[Math.floor(Math.random() * compositeNumbers.length)];
@@ -151,5 +172,6 @@ function generateNumbers() {
         button.onclick = () => handleSelection(buttons, scores, selectedNumbers[index], scores[index]);
     });
 }
+
 
 generateNumbers();
