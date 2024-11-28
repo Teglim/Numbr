@@ -102,8 +102,8 @@ function highlightHighestScore(buttons, scores) {
 
 function handleSelection(buttons, scores, number, smallestFactor) {
     const checkboxes = document.querySelectorAll("input[type='checkbox']");
-            
-    checkboxes.forEach(function(checkbox) {
+
+    checkboxes.forEach(function (checkbox) {
         checkbox.checked = false;
     });
 
@@ -125,9 +125,9 @@ function handleSelection(buttons, scores, number, smallestFactor) {
 
     document.getElementById('score').textContent = `得点: ${score}`;
 
-    document.getElementById('question').textContent = `問${questionCount + 1} / ${NumberQuestions}`;
-
     questionCount++;
+
+    document.getElementById('question').textContent = `問${questionCount + 1} / ${NumberQuestions}`;
 
     if (questionCount >= NumberQuestions) {
         endGame();
