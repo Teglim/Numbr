@@ -13,10 +13,13 @@ let questionCount = 0;
 let timerInterval;
 let answeredQuestions = [];
 let selectedNumbers = [];
+let NumberQuestions;
 
 function startGame() {
     document.getElementById("startScreen").style.display = "none";
     document.getElementById("gameScreen").style.display = "block";
+    NumberQuestions = parseInt(document.getElementById('problems').value);
+    timeLeft = parseInt(document.getElementById('timeLimit').value) * 60;
     startTimer();
     generateNumbers();
 }
@@ -116,7 +119,7 @@ function handleSelection(buttons, scores, number, smallestFactor) {
 
     questionCount++;
 
-    if (questionCount >= 20) {
+    if (questionCount >= NumberQuestions) {
         endGame();
     } else {
         generateNumbers();

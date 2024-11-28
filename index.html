@@ -11,13 +11,18 @@
 <body>
     <div id="startScreen">
         <h1>NumBr(仮)へようこそ</h1>
-        問題数は20問。制限時間は10分。<br>
         最小の素因数が、提示される4つの数字のうち最大のものを選びましょう。<br>
+        <form id="numberForm">
+            <label for="numberInput">　問題数:</label>
+            <input type="number" class="textbox" id="problems" value="10" required><br>
+            <label for="numberInput">制限時間:</label>
+            <input type="number" class="textbox" id="timeLimit" value="5" required><br>
+        </form>
         <button type="button" id="startButton" onclick="startGame()">スタート</button>
     </div>
 
     <div id="gameScreen">
-        <div id="timer">10:00</div>
+        <div id="timer">00:00</div>
         <div id="score">得点: 0</div>
         <div id="buttons" class="grid-container">
             <div class="button-container">
