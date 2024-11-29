@@ -58,8 +58,9 @@ function endGame() {
     document.getElementById('finalTime').textContent = `時間: ${minutes}:${seconds.toString().padStart(2, '0')} / ${d_minutes}:${d_seconds.toString().padStart(2, '0')}`;
 
     const questionResults = answeredQuestions.map((result, index) => {
-        return `問${index + 1}:${result.correct ? '○' : '×'}`;
-    }).join('  ');
+        const separator = ((index + 1) % 5 === 0) ? '<br>' : ' ';
+        return `問${index + 1}:${result.correct ? '○' : '×'}${separator}`;
+    }).join('');
     document.getElementById('questionResults').innerHTML = questionResults;
 }
 
