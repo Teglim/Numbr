@@ -12,14 +12,19 @@ body {
     margin-top: 50px;
 }
 
-#text {
-    text-align: left;
-}
-
 #gameScreen, #resultScreen {
     display: none;
     text-align: center;
     margin-top: 50px;
+}
+
+#explanation {
+    text-align: left;
+}
+
+#numberForm {
+    text-align: right;
+    width: 70%;
 }
 
 .grid-container {
@@ -117,11 +122,7 @@ button[type="button"] {
 
 .textbox {
     font-size: 18px;
+    width: 40%;
     padding: 3px;
     margin: 2px;
-}
-
-#numberForm {
-    text-align: right;
-    width: 80%;
 }

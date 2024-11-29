@@ -15,17 +15,29 @@ let timerInterval;
 let answeredQuestions = [];
 let selectedNumbers = [];
 let NumberQuestions;
+let numberOfChoices;
+let buttons;
+let checkboxes;
 
 function startGame() {
     document.getElementById("startScreen").style.display = "none";
     document.getElementById("gameScreen").style.display = "block";
     NumberQuestions = parseInt(document.getElementById('problems').value);
+    numberOfChoices = parseInt(document.getElementById('choices').value);
+    const allButtons = document.querySelectorAll('#buttons button');
+    buttons = Array.from(allButtons).slice(0, numberOfChoices);
+    const allCheckboxes = document.querySelectorAll("input[type='checkbox']");
+    checkboxes = Array.from(allCheckboxes).slice(0, numberOfChoices);
     time = parseInt(document.getElementById('timeLimit').value) * 60;
     timeLeft = time;
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
     document.getElementById('timer').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
     document.getElementById('question').textContent = `問1 / ${NumberQuestions}`;
+    for (let i = numberOfChoices; i < allButtons.length; i++) {
+        allButtons[i].style.display = 'none';
+        allCheckboxes[i].style.display = 'none';
+    }
     startTimer();
     generateNumbers();
 }
@@ -56,6 +68,7 @@ function endGame() {
 
     document.getElementById('finalScore').textContent = `得点: ${score} / ${NumberQuestions}`;
     document.getElementById('finalTime').textContent = `時間: ${minutes}:${seconds.toString().padStart(2, '0')} / ${d_minutes}:${d_seconds.toString().padStart(2, '0')}`;
+    document.getElementById('numChoices').textContent = `選択肢の数: ${numberOfChoices}`;
 
     const questionResults = answeredQuestions.map((result, index) => {
         const separator = ((index + 1) % 5 === 0) ? '<br>' : ' ';
@@ -89,7 +102,7 @@ function updateFactors(button, number, factorDisplayId) {
     factorDisplay.innerHTML = html;
 }
 
-function highlightHighestScore(buttons, scores) {
+function highlightHighestScore(scores) {
     const highestScore = Math.max(...scores);
     buttons.forEach((button, index) => {
         const factorDiv = button.nextElementSibling;
@@ -115,9 +128,7 @@ function clearDisplays() {
     highlighted.forEach(element => element.classList.remove('highest-score'));
 }
 
-function handleSelection(buttons, scores, number, smallestFactor) {
-    const checkboxes = document.querySelectorAll("input[type='checkbox']");
-
+function handleSelection(scores, number, smallestFactor) {
     checkboxes.forEach(function (checkbox) {
         checkbox.checked = false;
     });
@@ -126,7 +137,7 @@ function handleSelection(buttons, scores, number, smallestFactor) {
         updateFactors(button, selectedNumbers[index], `factor-display-${index + 1}`);
     });
 
-    highlightHighestScore(buttons, scores);
+    highlightHighestScore(scores);
 
     const details = document.getElementById('details');
     const factors = primeFactors(number);
@@ -158,10 +169,8 @@ function handleSelection(buttons, scores, number, smallestFactor) {
 }
 
 function generateNumbers() {
-    const buttons = document.querySelectorAll('#buttons button');
-
     selectedNumbers = [];
-    while (selectedNumbers.length < 4) {
+    while (selectedNumbers.length < numberOfChoices) {
         const num = compositeNumbers[Math.floor(Math.random() * compositeNumbers.length)];
         if (!selectedNumbers.includes(num)) selectedNumbers.push(num);
     }
@@ -170,9 +179,8 @@ function generateNumbers() {
 
     buttons.forEach((button, index) => {
         button.textContent = selectedNumbers[index];
-        button.onclick = () => handleSelection(buttons, scores, selectedNumbers[index], scores[index]);
+        button.onclick = () => handleSelection(scores, selectedNumbers[index], scores[index]);
     });
 }
-
 
 generateNumbers();

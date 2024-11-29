@@ -10,20 +10,22 @@
 
 <body>
     <div id="startScreen">
-        <h1>NumBr(仮)へようこそ</h1>
-        <div id="text">
+        <h1>NumBr(仮) Ver.1.1</h1>
+        <div id="explanation">
             <ul>
-                <li>最小の素因数が、提示される4つの数字のうち最大になるものを選びましょう。</li>
+                <li>最小の素因数が、提示される選択肢のうち最大になるものを選びましょう。</li>
                 <li>回答するときは、数字のボタンを押すだけです。</li>
                 <li>正解が複数ある場合、どれを選んでもOKです。</li>
                 <li>問題画面の横のチェックボックスの使途は自由ですが、回答候補から外れたものをチェックするのがオススメです。</li>
             </ul>
         </div>
         <form id="numberForm">
-            <label for="numberInput">　問題数:</label>
-            <input type="number" class="textbox" id="problems" value="10" required><br>
+            <label for="choicesInput">選択肢の数:</label>
+            <input type="number" class="textbox" id="choices" value="4" min="2" max="10" required><br>
+            <label for="numberInput">問題数:</label>
+            <input type="number" class="textbox" id="problems" value="10" min="1" required><br>
             <label for="numberInput">制限時間(分):</label>
-            <input type="number" class="textbox" id="timeLimit" value="5" required><br>
+            <input type="number" class="textbox" id="timeLimit" value="5" min="1" required><br>
         </form>
         <button type="button" id="startButton" onclick="startGame()">スタート</button>
     </div>
@@ -53,6 +55,26 @@
                 <button id="btn4"></button>
                 <div id="factor-display-4" class="factor-display"><br></div>
             </div>
+            <div class="button-container">
+                <input type='checkbox' id='5' class='checkbox'>
+                <button id="btn5"></button>
+                <div id="factor-display-5" class="factor-display"><br></div>
+            </div>
+            <div class="button-container">
+                <input type='checkbox' id='6' class='checkbox'>
+                <button id="btn6"></button>
+                <div id="factor-display-6" class="factor-display"><br></div>
+            </div>
+            <div class="button-container">
+                <input type='checkbox' id='7' class='checkbox'>
+                <button id="btn7"></button>
+                <div id="factor-display-7" class="factor-display"><br></div>
+            </div>
+            <div class="button-container">
+                <input type='checkbox' id='8' class='checkbox'>
+                <button id="btn8"></button>
+                <div id="factor-display-8" class="factor-display"><br></div>
+            </div>
         </div>
         <div id="details"><br><br></div>
         <button type="button" id="skipButton" onclick="endGame()">リタイア</button>
@@ -62,6 +84,7 @@
         <h1>結果</h1>
         <div id="finalScore">得点: 0</div>
         <div id="finalTime">時間: 00:00</div>
+        <div id="numChoices"></div>
         <div id="questionResults"></div>
         <button type="button" id="resultButton" onclick="location.href='./index.html'">リスタート</button>
     </div>
