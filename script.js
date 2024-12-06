@@ -20,15 +20,34 @@ let buttons;
 let checkboxes;
 
 function startGame() {
-    document.getElementById("startScreen").style.display = "none";
-    document.getElementById("gameScreen").style.display = "block";
+    const detailsDiv = document.getElementById("errorDisplay");
+    detailsDiv.innerHTML = "";
+
     NumberQuestions = parseInt(document.getElementById('problems').value);
     numberOfChoices = parseInt(document.getElementById('choices').value);
+    const timeInput = parseInt(document.getElementById('timeLimit').value);
+
+    if (!Number.isInteger(NumberQuestions) || NumberQuestions < 1) {
+        detailsDiv.innerHTML = "問題数は1以上の整数を入力してください。";
+        return;
+    }
+
+    if (!Number.isInteger(numberOfChoices) || numberOfChoices < 2 || numberOfChoices > 8) {
+        detailsDiv.innerHTML = "選択肢は2以上8以下の整数を入力してください。";
+        return;
+    }
+
+    if (!Number.isInteger(timeInput) || timeInput < 1) {
+        detailsDiv.innerHTML = "制限時間は1以上の整数を入力してください。";
+        return;
+    }
+    document.getElementById("startScreen").style.display = "none";
+    document.getElementById("gameScreen").style.display = "block";
     const allButtons = document.querySelectorAll('#buttons button');
     buttons = Array.from(allButtons).slice(0, numberOfChoices);
     const allCheckboxes = document.querySelectorAll("input[type='checkbox']");
     checkboxes = Array.from(allCheckboxes).slice(0, numberOfChoices);
-    time = parseInt(document.getElementById('timeLimit').value) * 60;
+    time = timeInput * 60;
     timeLeft = time;
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;

@@ -21,13 +21,14 @@
         </div>
         <form id="numberForm">
             <label for="choicesInput">選択肢の数:</label>
-            <input type="number" class="textbox" id="choices" value="4" min="2" max="10" required><br>
+            <input type="number" class="textbox" id="choices" value="4" min="2" max="8" required><br>
             <label for="numberInput">問題数:</label>
             <input type="number" class="textbox" id="problems" value="10" min="1" required><br>
             <label for="numberInput">制限時間(分):</label>
             <input type="number" class="textbox" id="timeLimit" value="5" min="1" required><br>
         </form>
         <button type="button" id="startButton" onclick="startGame()">スタート</button>
+        <div id="errorDisplay"></div>
     </div>
 
     <div id="gameScreen">
